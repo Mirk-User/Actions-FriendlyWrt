@@ -1,10 +1,10 @@
 on:
+  workflow_dispatch:
   watch:
     types: started
 jobs:
   prepare_release:
     runs-on: ubuntu-22.04
-    if: github.event.repository.owner.id == github.event.sender.id
     steps:
     - name: Get release tag
       id: release_tag
@@ -16,7 +16,7 @@ jobs:
       id: release
       uses: softprops/action-gh-release@v1
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.Token }}
       with:
         tag_name: ${{ steps.release_tag.outputs.release_tag }}
         draft: false
@@ -28,11 +28,10 @@ jobs:
   build_friendlywrt:
     needs: prepare_release
     runs-on: ubuntu-22.04
-    if: github.event.repository.owner.id == github.event.sender.id
     strategy:
       matrix:
-        VERSION: ['23.05', '24.10']
-        SET: [docker, non-docker]
+        VERSION: ['24.10']
+        SET: [non-docker]
 
     steps:
     - name: Checkout
@@ -127,7 +126,7 @@ jobs:
     - name: Upload rootfs package
       uses: svenstaro/upload-release-action@v2
       with:
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        repo_token: ${{ secrets.Token }}
         file: ./artifact/${{ steps.create_rootfs_package.outputs.rootfs_filename }}
         asset_name: ${{ steps.create_rootfs_package.outputs.rootfs_filename }}
         tag: ${{ needs.prepare_release.outputs.release_tag }}
@@ -136,13 +135,12 @@ jobs:
   build_img:
     needs: [prepare_release,build_friendlywrt]
     runs-on: ubuntu-22.04
-    if: github.event.repository.owner.id == github.event.sender.id
 
     strategy:
       matrix:
-        VERSION: ['23.05', '24.10']
-        CPU: [rk3328, rk3528, rk3399, rk3566, rk3568, rk3576, rk3588]
-        SET: [docker, non-docker]
+        VERSION: ['24.10']
+        CPU: [rk3328]
+        SET: [non-docker]
     steps:
     - name: Checkout
       uses: actions/checkout@main
@@ -188,7 +186,7 @@ jobs:
       if: matrix.SET == 'non-docker'
       uses: robinraju/release-downloader@v1.6
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.Token }}
       with:
         repository: ${{ github.repository }}
         tag: ${{ needs.prepare_release.outputs.release_tag }}
@@ -198,7 +196,7 @@ jobs:
       if: matrix.SET == 'docker'
       uses: robinraju/release-downloader@v1.6
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.Token }}
       with:
         repository: ${{ github.repository }}
         tag: ${{ needs.prepare_release.outputs.release_tag }}
@@ -281,9 +279,8 @@ jobs:
     - name: Upload image to release
       uses: svenstaro/upload-release-action@v2
       with:
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        repo_token: ${{ secrets.Token }}
         file: ./artifact/${{ steps.config.outputs.img_filename }}.gz
         asset_name: ${{ steps.config.outputs.img_filename }}.gz
         tag: ${{ needs.prepare_release.outputs.release_tag }}
         overwrite: true
-
