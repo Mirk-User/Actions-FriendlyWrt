@@ -182,6 +182,23 @@ jobs:
         repo sync -c scripts/sd-fuse  --no-clone-bundle
         repo sync -c toolchain  --no-clone-bundle
 
+    - name: Remove luci-i18n-emmc-tools-zh-cn.ipk
+      run: |
+        cd project
+        if [ -f device/common/emmc-tools/install.sh ]; then
+            sed -i '/luci-i18n-emmc-tools-zh-cn.ipk/,+4d' device/common/emmc-tools/install.sh
+            echo "install.sh cleaned"
+        else
+            echo "install.sh not found, skipping!"
+        fi
+        
+        if [ -f device/common/emmc-tools/luci-i18n-emmc-tools-zh-cn.ipk ]; then
+            rm -f device/common/emmc-tools/luci-i18n-emmc-tools-zh-cn.ipk
+            echo "Package removed"
+        else
+            echo "Package not found!"
+        fi
+
     - name: Download friendlywrt rootfs (non-docker)
       if: matrix.SET == 'non-docker'
       uses: robinraju/release-downloader@v1.6
