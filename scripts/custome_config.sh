@@ -114,3 +114,9 @@ sed -i -e 's/CONFIG_PACKAGE_collectd-mod-rrdtool=y/CONFIG_PACKAGE_collectd-mod-r
 sed -i -e 's/CONFIG_PACKAGE_collectd-mod-thermal=y/CONFIG_PACKAGE_collectd-mod-thermal=n/g' configs/rockchip/01-nanopi
 sed -i -e 's/CONFIG_PACKAGE_collectd-mod-uptime=y/CONFIG_PACKAGE_collectd-mod-uptime=n/g' configs/rockchip/01-nanopi
 sed -i -e 's/CONFIG_PACKAGE_collectd-mod-wireless=y/CONFIG_PACKAGE_collectd-mod-wireless=n/g' configs/rockchip/01-nanopi
+
+# Other
+sed -i -e 's/CONFIG_PACKAGE_git=y/CONFIG_PACKAGE_git=n/g' configs/rockchip/01-nanopi
+sed -i -e 's/CONFIG_PACKAGE_git-http=y/CONFIG_PACKAGE_git-http=n/g' configs/rockchip/01-nanopi
+sed -i -e 's/CONFIG_PACKAGE_luci-theme-material=y/CONFIG_PACKAGE_luci-theme-material=n/g' configs/rockchip/01-nanopi
+sed -i -e 's/CONFIG_PACKAGE_luci-theme-openwrt-2020=y/CONFIG_PACKAGE_luci-theme-openwrt-2020=n/g' configs/rockchip/01-nanopi
