@@ -75,17 +75,14 @@ jobs:
     - name: Fix system settings
       run: |
         cd project
-        # HOSTNAME, timezone, NTP
-        sed -i "s/HOSTNAME=\"FriendlyWrt\"/HOSTNAME=\"OpenWrt\"/" target/linux/rockchip/armv8/base-files/root/setup.sh
-        sed -i "s/timezone=CST-8/timezone=UTC/" target/linux/rockchip/armv8/base-files/root/setup.sh
-        sed -i "s/zonename=Asia\/Shanghai/zonename=UTC/" target/linux/rockchip/armv8/base-files/root/setup.sh
-        sed -i "s/add_list system.ntp.server=\"time.apple.com\"/add_list system.ntp.server=\"0.openwrt.pool.ntp.org\"/" target/linux/rockchip/armv8/base-files/root/setup.sh
-        sed -i "s/add_list system.ntp.server=\"ntp.tencent.com\"/add_list system.ntp.server=\"1.openwrt.pool.ntp.org\"/" target/linux/rockchip/armv8/base-files/root/setup.sh
-        sed -i "s/add_list system.ntp.server=\"time.cloudflare.com\"/add_list system.ntp.server=\"2.openwrt.pool.ntp.org\"/" target/linux/rockchip/armv8/base-files/root/setup.sh
-        sed -i "s/add_list system.ntp.server=\"0\.\${def_pool}\"/add_list system.ntp.server=\"3.openwrt.pool.ntp.org\"/" target/linux/rockchip/armv8/base-files/root/setup.sh
-        
-        # IP address
-        sed -i 's/192.168.2.1/192.168.1.1/g' target/linux/rockchip/armv8/base-files/etc/board.d/02_network
+        sed -i "s/HOSTNAME=\"FriendlyWrt\"/HOSTNAME=\"OpenWrt\"/" friendlywrt/target/linux/rockchip/armv8/base-files/root/setup.sh
+        sed -i "s/timezone=CST-8/timezone=UTC/" friendlywrt/target/linux/rockchip/armv8/base-files/root/setup.sh
+        sed -i "s/zonename=Asia\/Shanghai/zonename=UTC/" friendlywrt/target/linux/rockchip/armv8/base-files/root/setup.sh
+        sed -i "s/add_list system.ntp.server=\"time.apple.com\"/add_list system.ntp.server=\"0.openwrt.pool.ntp.org\"/" friendlywrt/target/linux/rockchip/armv8/base-files/root/setup.sh
+        sed -i "s/add_list system.ntp.server=\"ntp.tencent.com\"/add_list system.ntp.server=\"1.openwrt.pool.ntp.org\"/" friendlywrt/target/linux/rockchip/armv8/base-files/root/setup.sh
+        sed -i "s/add_list system.ntp.server=\"time.cloudflare.com\"/add_list system.ntp.server=\"2.openwrt.pool.ntp.org\"/" friendlywrt/target/linux/rockchip/armv8/base-files/root/setup.sh
+        sed -i "s/add_list system.ntp.server=\"0\.\${def_pool}\"/add_list system.ntp.server=\"3.openwrt.pool.ntp.org\"/" friendlywrt/target/linux/rockchip/armv8/base-files/root/setup.sh
+        sed -i 's/192.168.2.1/192.168.1.1/g' friendlywrt/target/linux/rockchip/armv8/base-files/etc/board.d/02_network
 
     - name: Apply customizations
       run: |
