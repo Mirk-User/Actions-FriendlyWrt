@@ -120,3 +120,6 @@ sed -i -e 's/CONFIG_PACKAGE_git=y/CONFIG_PACKAGE_git=n/g' configs/rockchip/01-na
 sed -i -e 's/CONFIG_PACKAGE_git-http=y/CONFIG_PACKAGE_git-http=n/g' configs/rockchip/01-nanopi
 sed -i -e 's/CONFIG_PACKAGE_luci-theme-material=y/CONFIG_PACKAGE_luci-theme-material=n/g' configs/rockchip/01-nanopi
 sed -i -e 's/CONFIG_PACKAGE_luci-theme-openwrt-2020=y/CONFIG_PACKAGE_luci-theme-openwrt-2020=n/g' configs/rockchip/01-nanopi
+
+# usb-modeswitch-official
+sed -i 's/CONFIG_PACKAGE_usb-modeswitch-official=y/CONFIG_PACKAGE_usb-modeswitch-official=n/g' configs/rockchip/01-nanopi
