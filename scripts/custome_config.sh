@@ -4,6 +4,34 @@ sed -i -e '/CONFIG_MAKE_TOOLCHAIN=y/d' configs/rockchip/01-nanopi
 sed -i -e 's/CONFIG_IB=y/# CONFIG_IB is not set/g' configs/rockchip/01-nanopi
 sed -i -e 's/CONFIG_SDK=y/# CONFIG_SDK is not set/g' configs/rockchip/01-nanopi
 
+# Hostname
+sed -i "s/HOSTNAME=\"FriendlyWrt\"/HOSTNAME=\"OpenWrt\"/" friendlywrt/target/linux/rockchip/armv8/base-files/root/setup.sh
+
+# Timezone
+sed -i "s/timezone=CST-8/timezone=UTC/" friendlywrt/target/linux/rockchip/armv8/base-files/root/setup.sh
+sed -i "s/zonename=Asia\/Shanghai/zonename=UTC/" friendlywrt/target/linux/rockchip/armv8/base-files/root/setup.sh
+
+# NTP
+sed -i "s/add_list system.ntp.server=\"time.apple.com\"/add_list system.ntp.server=\"0.openwrt.pool.ntp.org\"/" friendlywrt/target/linux/rockchip/armv8/base-files/root/setup.sh
+sed -i "s/add_list system.ntp.server=\"ntp.tencent.com\"/add_list system.ntp.server=\"1.openwrt.pool.ntp.org\"/" friendlywrt/target/linux/rockchip/armv8/base-files/root/setup.sh
+sed -i "s/add_list system.ntp.server=\"time.cloudflare.com\"/add_list system.ntp.server=\"2.openwrt.pool.ntp.org\"/" friendlywrt/target/linux/rockchip/armv8/base-files/root/setup.sh
+sed -i "s/add_list system.ntp.server=\"0\.\${def_pool}\"/add_list system.ntp.server=\"3.openwrt.pool.ntp.org\"/" friendlywrt/target/linux/rockchip/armv8/base-files/root/setup.sh
+
+# IP
+sed -i 's/192.168.2.1/192.168.1.1/g' friendlywrt/target/linux/rockchip/armv8/base-files/etc/board.d/02_network
+
+# Banner
+cat > friendlywrt/target/linux/rockchip/armv8/base-files/etc/banner << 'EOF'
+  _______                     ________        __
+ |       |.-----.-----.-----.|  |  |  |.----.|  |_
+ |   -   ||  _  |  -__|     ||  |  |  ||   _||   _|
+ |_______||   __|_____|__|__||________||__|  |____|
+          |__| W I R E L E S S   F R E E D O M
+ -----------------------------------------------------
+ %D %V, %C
+ -----------------------------------------------------
+EOF
+
 # Languages
 sed -i -e 's/CONFIG_LUCI_LANG_bg=y/CONFIG_LUCI_LANG_bg=n/g' configs/rockchip/02-luci_lang
 sed -i -e 's/CONFIG_LUCI_LANG_ca=y/CONFIG_LUCI_LANG_ca=n/g' configs/rockchip/02-luci_lang
