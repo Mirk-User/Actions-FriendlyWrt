@@ -150,5 +150,8 @@ sed -i -e 's/CONFIG_PACKAGE_vim-full=y/CONFIG_PACKAGE_vim-full=n/g' configs/rock
 sed -i -e 's/CONFIG_PACKAGE_luci-theme-material=y/CONFIG_PACKAGE_luci-theme-material=n/g' configs/rockchip/01-nanopi
 sed -i -e 's/CONFIG_PACKAGE_luci-theme-openwrt-2020=y/CONFIG_PACKAGE_luci-theme-openwrt-2020=n/g' configs/rockchip/01-nanopi
 
+# Fuck fucking bash (Какой же пиндосский язык обоссаный!)
+sed -i -e 's/CONFIG_PACKAGE_bash=y/CONFIG_PACKAGE_bash=n/g' configs/rockchip/01-nanopi
+
 # usb-modeswitch-official
 sed -i 's/CONFIG_PACKAGE_usb-modeswitch-official=y/CONFIG_PACKAGE_usb-modeswitch-official=n/g' configs/rockchip/01-nanopi
