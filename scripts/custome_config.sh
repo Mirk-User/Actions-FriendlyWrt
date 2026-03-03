@@ -146,6 +146,7 @@ sed -i -e 's/CONFIG_PACKAGE_collectd-mod-wireless=y/CONFIG_PACKAGE_collectd-mod-
 # Other
 sed -i -e 's/CONFIG_PACKAGE_git=y/CONFIG_PACKAGE_git=n/g' configs/rockchip/01-nanopi
 sed -i -e 's/CONFIG_PACKAGE_git-http=y/CONFIG_PACKAGE_git-http=n/g' configs/rockchip/01-nanopi
+sed -i -e 's/CONFIG_PACKAGE_vim-full=y/CONFIG_PACKAGE_vim-full=n/g' configs/rockchip/01-nanopi
 sed -i -e 's/CONFIG_PACKAGE_luci-theme-material=y/CONFIG_PACKAGE_luci-theme-material=n/g' configs/rockchip/01-nanopi
 sed -i -e 's/CONFIG_PACKAGE_luci-theme-openwrt-2020=y/CONFIG_PACKAGE_luci-theme-openwrt-2020=n/g' configs/rockchip/01-nanopi
 
